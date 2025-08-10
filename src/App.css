@@ -1,0 +1,35 @@
+.gradient-text {
+  background: linear-gradient(
+    to right,
+    #9795ff 0%,
+    #ffffff 42%,
+    #ffffff 59%,
+    #be9fff 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* These two below help on some browsers */
+  background-clip: text;
+  color: transparent;
+}
+
+.line-color {
+  background: #01002b;
+  background: linear-gradient(
+    90deg,
+    rgba(1, 0, 43, 1) 0%,
+    rgba(133, 76, 255, 1) 3%,
+    rgba(80, 76, 255, 1) 96%,
+    rgba(1, 0, 43, 1) 100%
+  );
+}
+
+.product-card {
+  background: #e6dbff;
+  background: radial-gradient(
+    circle,
+    rgba(230, 219, 255, 1) 0%,
+    rgba(246, 246, 246, 1) 44%,
+    rgba(216, 215, 255, 1) 100%
+  );
+}
