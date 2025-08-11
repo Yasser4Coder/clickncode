@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import TestimonialsCard from "./components/TestimonialsCard";
-import { testimonialsData } from "./testimonialsData.js";
+import { testimonialsData } from "./TestimonialsData.js";
 import testimonialCardBg from "../../assets/TestimonialsCardBG.svg";
 import testimonialCardAdd from "../../assets/add.svg";
 import testimonialsIconBg from "../../assets/bgicom.svg";
