@@ -18,7 +18,7 @@ const ProductsSection = () => {
       : productsData.filter((product) => product.category === selectedCategory);
 
   return (
-    <div className="container mx-auto px-4 text-white">
+    <section id="portfolio" className="container mx-auto px-4 text-white">
       <div className="flex flex-col gap-4  mb-8">
         <h1 className="gradient-text text-3xl sm:text-5xl md:text-6xl font-medium leading-tight">
           Our Products
@@ -49,7 +49,7 @@ const ProductsSection = () => {
       </div>
 
       {/* Products Grid - Responsive Layout */}
-      <div className="products">
+      <div className="products relative z-20">
         {/* Mobile: Single column, Desktop: Two columns */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
           {filteredProducts.map((product) => (
@@ -66,7 +66,7 @@ const ProductsSection = () => {
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -15,7 +15,7 @@ const ProductCard = ({ product }) => {
   const productData = product || defaultProduct;
 
   return (
-    <div className="w-full mb-3 lg:mb-0 h-[500px]">
+    <div className="w-full mb-3 relative z-20 lg:mb-0 h-[500px]">
       {/* Top Card Section - Light Background */}
       <div className="relative product-card rounded-3xl p-6 md:p-8 lg:p-10 shadow-xl border border-gray-100 h-[280px]">
         {/* Development Project Tag - Pill-shaped */}

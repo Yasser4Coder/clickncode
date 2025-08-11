@@ -37,7 +37,7 @@ const ContactForm = () => {
       message: "Please enter a valid phone number (10-20 digits)",
     },
     projectDescription: {
-      pattern: /^[\w\s\.,!?-]{10,1000}$/,
+      pattern: /^[\w\s\.,!?\-()]{10,1000}$/,
       message: "Project description must be 10-1000 characters",
     },
   };
@@ -65,14 +65,13 @@ const ContactForm = () => {
     return "";
   };
 
-  // Handle input changes with sanitization
+  // Handle input changes without sanitization (sanitize only on submit)
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    const sanitizedValue = sanitizeInput(value);
 
     setFormData((prev) => ({
       ...prev,
-      [name]: sanitizedValue,
+      [name]: value,
     }));
 
     // Clear error when user starts typing
@@ -136,6 +135,14 @@ const ContactForm = () => {
     setIsSubmitting(true);
 
     try {
+      // Sanitize data before sending
+      const sanitizedData = {
+        fullName: sanitizeInput(formData.fullName),
+        email: sanitizeInput(formData.email),
+        phone: sanitizeInput(formData.phone),
+        projectDescription: sanitizeInput(formData.projectDescription),
+      };
+
       // Simulate API call with security headers
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -144,7 +151,7 @@ const ContactForm = () => {
           "X-CSRF-Token": csrfToken.current,
           "X-Requested-With": "XMLHttpRequest",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(sanitizedData),
         credentials: "same-origin", // Include cookies for session validation
       });
 
@@ -183,8 +190,11 @@ const ContactForm = () => {
   }, [formData.projectDescription]);
 
   return (
-    <div className="relative min-w-[100vw] bg-gradient-to-b from-black to-gray-900 py-20">
-      <div className="container mx-auto px-4">
+    <section
+      id="contact"
+      className="relative min-w-[100vw] bg-gradient-to-b from-black to-gray-900 py-20"
+    >
+      <div className="container mx-auto px-4 relative z-20">
         {/* Header */}
         <div className="text-start mb-16">
           <h1 className="gradient-text text-3xl sm:text-5xl md:text-6xl font-medium leading-tight mb-6">
@@ -374,7 +384,7 @@ const ContactForm = () => {
           </form>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

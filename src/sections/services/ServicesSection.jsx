@@ -3,14 +3,15 @@ import Button from "../../components/ui/Button";
 import ServiceCard from "./components/ServiceCard";
 import heroBg2 from "../../assets/hero-section-bg-effect2.png";
 import perbg from "../../assets/perbg.png";
+import LineServicesSection from "../../components/LineServicesSection";
 
 const ServicesSection = () => {
   return (
     <section
       id="services"
-      className="text-white relative container mt-[100px] flex flex-col gap-[150px]"
+      className="text-white relative container mt-[100px] flex flex-col gap-[50px] mb-[126px]"
     >
-      <div className="flex flex-col gap-4 pt-[60px]">
+      <div className="flex flex-col gap-4 pt-[60px] relative z-20">
         <h1 className="gradient-text text-3xl sm:text-5xl md:text-6xl font-medium leading-tight">
           We don’t just offer services <br /> we build tailored solutions to
           match your vision and budget
@@ -20,7 +21,8 @@ const ServicesSection = () => {
           full-stack team crafting digital solutions from idea to launch
         </p>
       </div>
-      <div className="flex flex-col gap-4">
+      <LineServicesSection />
+      <div className="flex flex-col gap-4 relative z-20">
         <h1 className="gradient-text text-3xl sm:text-5xl md:text-6xl font-medium leading-tight">
           Let’s work together <br /> with our us
         </h1>
@@ -32,7 +34,7 @@ const ServicesSection = () => {
           <Button color="white">Get Started</Button>
         </div>
       </div>
-      <div className="cards flex justify-center flex-wrap gap-[40px]">
+      <div className="cards flex justify-center relative z-20 flex-wrap gap-[40px]">
         <ServiceCard
           icon={"web"}
           title={"Website Dev"}
@@ -66,13 +68,6 @@ const ServicesSection = () => {
           bg="uiux"
         />
       </div>
-      {/* line */}
-      <div className=" absolute hidden sm:block w-full h-full z-[-1]">
-        <div className=" absolute top-[5%] [@media(min-width:863px)]:top-[8%] right-[5%] [@media(min-width:863px)]:right-[8%] border-[#854CFF] rounded-br-[4rem] rounded-r-[4rem] border-r-4 border-b-4 w-[20%] [@media(min-width:863px)]:h-[17%] h-[14%]"></div>
-        <div className=" absolute top-[5%] [@media(min-width:863px)]:top-[8%] [@media(min-width:863px)]:right-[28%] right-[25%] border-[#854CFF] border-b-4 w-[70%] xl:w-[70%] [@media(min-width:863px)]:h-[17%] h-[14%]"></div>
-        <div className=" absolute top-[18.864%] [@media(min-width:863px)]:top-[24.75%] right-[76%] [@media(min-width:863px)]:right-[82%] xl:right-[85%] border-[#854CFF] rounded-l-[4rem] border-t-4 border-l-4 border-b-4 [@media(min-width:863px)]:w-[23%] w-[26%] [@media(min-width:863px)]:h-[38%] h-[25%]"></div>
-      </div>
-
       <img
         src={heroBg2}
         alt=""
