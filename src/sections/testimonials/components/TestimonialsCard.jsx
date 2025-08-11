@@ -4,6 +4,11 @@ import testimonialCardIcon from "../../../assets/TestimonialsIcon.svg";
 import testimonialCardImage from "../../../assets/TestimonialsCardImage.png";
 
 const TestimonialsCard = ({ testimonial }) => {
+  // Safety check: Only render approved testimonials
+  if (!testimonial || testimonial.status !== "approved") {
+    return null; // Don't render anything for non-approved testimonials
+  }
+
   // Default testimonial data if none provided
   const defaultTestimonial = {
     name: "Sarah Mekkawi",

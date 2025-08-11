@@ -1,6 +1,16 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-unused-vars */
 import React, { useState, useRef, useEffect } from "react";
+import { useContactSubmission } from "../../hooks/useContact.js";
+import toast from "react-hot-toast";
+import {
+  FiSend,
+  FiUser,
+  FiMail,
+  FiPhone,
+  FiFileText,
+  FiCheckCircle,
+} from "react-icons/fi";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -11,16 +21,10 @@ const ContactForm = () => {
   });
 
   const [errors, setErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitCount, setSubmitCount] = useState(0);
-  const [lastSubmitTime, setLastSubmitTime] = useState(0);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-  // CSRF token simulation (in real app, this would come from your backend)
-  const csrfToken = useRef(Math.random().toString(36).substring(2));
-
-  // Rate limiting: max 3 submissions per minute
-  const RATE_LIMIT = 3;
-  const RATE_LIMIT_WINDOW = 60000; // 1 minute in milliseconds
+  // React Query mutation
+  const contactMutation = useContactSubmission();
 
   // Input validation patterns
   const validationPatterns = {
@@ -65,7 +69,7 @@ const ContactForm = () => {
     return "";
   };
 
-  // Handle input changes without sanitization (sanitize only on submit)
+  // Handle input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
@@ -98,84 +102,53 @@ const ContactForm = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Check rate limiting
-  const checkRateLimit = () => {
-    const now = Date.now();
-    if (now - lastSubmitTime < RATE_LIMIT_WINDOW) {
-      if (submitCount >= RATE_LIMIT) {
-        return false;
-      }
-    } else {
-      // Reset counter if window has passed
-      setSubmitCount(0);
-    }
-    return true;
-  };
-
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Prevent double submission
-    if (isSubmitting) return;
-
-    // Check rate limiting
-    if (!checkRateLimit()) {
-      setErrors({
-        form: "Too many submissions. Please wait before trying again.",
-      });
-      return;
-    }
-
     // Validate form
     if (!validateForm()) {
+      toast.error("Please fix the errors in the form");
       return;
     }
 
-    setIsSubmitting(true);
+    // Sanitize data before sending
+    const sanitizedData = {
+      fullName: sanitizeInput(formData.fullName),
+      email: sanitizeInput(formData.email),
+      phone: sanitizeInput(formData.phone),
+      projectDescription: sanitizeInput(formData.projectDescription),
+    };
 
     try {
-      // Sanitize data before sending
-      const sanitizedData = {
-        fullName: sanitizeInput(formData.fullName),
-        email: sanitizeInput(formData.email),
-        phone: sanitizeInput(formData.phone),
-        projectDescription: sanitizeInput(formData.projectDescription),
-      };
+      await contactMutation.mutateAsync(sanitizedData);
 
-      // Simulate API call with security headers
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRF-Token": csrfToken.current,
-          "X-Requested-With": "XMLHttpRequest",
-        },
-        body: JSON.stringify(sanitizedData),
-        credentials: "same-origin", // Include cookies for session validation
+      // Success - reset form and show success state
+      setFormData({
+        fullName: "",
+        email: "",
+        phone: "",
+        projectDescription: "",
       });
+      setErrors({});
+      setIsSuccess(true);
 
-      if (response.ok) {
-        // Success - reset form
-        setFormData({
-          fullName: "",
-          email: "",
-          phone: "",
-          projectDescription: "",
-        });
-        setErrors({});
-        setSubmitCount((prev) => prev + 1);
-        setLastSubmitTime(Date.now());
+      // Show success toast
+      toast.success("Thank you! Your message has been sent successfully.");
 
-        // Show success message (in real app, use a toast notification)
-        alert("Thank you! Your message has been sent successfully.");
-      } else {
-        throw new Error("Submission failed");
-      }
+      // Reset success state after 3 seconds
+      setTimeout(() => setIsSuccess(false), 3000);
     } catch (error) {
-      setErrors({ form: "Failed to send message. Please try again later." });
-    } finally {
-      setIsSubmitting(false);
+      console.error("Contact form submission error:", error);
+
+      // Handle specific error types
+      if (error.response?.status === 429) {
+        toast.error("Too many submissions. Please wait before trying again.");
+      } else if (error.response?.data?.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Failed to send message. Please try again later.");
+      }
     }
   };
 
@@ -189,6 +162,39 @@ const ContactForm = () => {
     }
   }, [formData.projectDescription]);
 
+  // Success state UI
+  if (isSuccess) {
+    return (
+      <section
+        id="contact"
+        className="relative min-w-[100vw] bg-gradient-to-b from-black to-gray-900 py-20"
+      >
+        <div className="container mx-auto px-4 relative z-20">
+          <div className="max-w-2xl mx-auto text-center">
+            <div className="mb-8">
+              <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                <FiCheckCircle className="w-10 h-10 text-white" />
+              </div>
+              <h2 className="text-3xl font-bold text-white mb-4">
+                Message Sent Successfully!
+              </h2>
+              <p className="text-gray-300 text-lg">
+                Thank you for reaching out! We'll get back to you within 24-48
+                hours.
+              </p>
+            </div>
+            <button
+              onClick={() => setIsSuccess(false)}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200"
+            >
+              Send Another Message
+            </button>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section
       id="contact"
@@ -198,188 +204,177 @@ const ContactForm = () => {
         {/* Header */}
         <div className="text-start mb-16">
           <h1 className="gradient-text text-3xl sm:text-5xl md:text-6xl font-medium leading-tight mb-6">
-            Let’s work with Us
+            Let's Build Something
+            <br />
+            <span className="text-white">Amazing Together</span>
           </h1>
-          <p className="text-white/80 text-lg md:text-xl max-w-2xl">
-            Got an idea or an ongoing project? Let’s discuss how we can bring it
-            to life starting with a free consultation
+          <p className="text-gray-300 text-lg sm:text-xl max-w-3xl">
+            Ready to turn your vision into reality? Fill out the form below and
+            let's discuss how we can bring your project to life.
           </p>
         </div>
 
         {/* Contact Form */}
-        <div className="max-w-2xl mx-auto">
-          <form onSubmit={handleSubmit} className="rounded-3xl p-8 md:p-12">
-            {/* CSRF Token (hidden) */}
-            <input type="hidden" name="csrf_token" value={csrfToken.current} />
-
-            {/* Form Error Display */}
-            {errors.form && (
-              <div className="mb-6 p-4 bg-red-500/20 border border-red-500/30 rounded-xl text-red-300 text-center">
-                {errors.form}
+        <div className="max-w-4xl mx-auto">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Name and Email Row */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Full Name */}
+              <div className="relative">
+                <label
+                  htmlFor="fullName"
+                  className="block text-sm font-medium text-gray-300 mb-2"
+                >
+                  Full Name *
+                </label>
+                <div className="relative">
+                  <FiUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                  <input
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleInputChange}
+                    className={`w-full pl-10 pr-4 py-3 bg-gray-800 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
+                      errors.fullName ? "border-red-500" : "border-gray-600"
+                    }`}
+                    placeholder="Enter your full name"
+                  />
+                </div>
+                {errors.fullName && (
+                  <p className="mt-1 text-sm text-red-400 flex items-center">
+                    <span className="w-1 h-1 bg-red-400 rounded-full mr-2"></span>
+                    {errors.fullName}
+                  </p>
+                )}
               </div>
-            )}
 
-            {/* Full Name Field */}
-            <div className="mb-6">
-              <label
-                htmlFor="fullName"
-                className="block text-[#4A3AFF] font-semibold mb-3 text-lg"
-              >
-                Full Name
-              </label>
-              <input
-                type="text"
-                id="fullName"
-                name="fullName"
-                value={formData.fullName}
-                onChange={handleInputChange}
-                placeholder="example: taha laib"
-                className={`w-full px-4 py-4 bg-white rounded-xl text-gray-800 placeholder-gray-500 border-2 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#4A3AFF] focus:border-transparent ${
-                  errors.fullName ? "border-red-500" : "border-gray-200"
-                }`}
-                maxLength={50}
-                autoComplete="name"
-                required
-              />
-              {errors.fullName && (
-                <p className="mt-2 text-red-400 text-sm">{errors.fullName}</p>
-              )}
+              {/* Email */}
+              <div className="relative">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-300 mb-2"
+                >
+                  Email Address *
+                </label>
+                <div className="relative">
+                  <FiMail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className={`w-full pl-10 pr-4 py-3 bg-gray-800 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
+                      errors.email ? "border-red-500" : "border-gray-600"
+                    }`}
+                    placeholder="Enter your email address"
+                  />
+                </div>
+                {errors.email && (
+                  <p className="mt-1 text-sm text-red-400 flex items-center">
+                    <span className="w-1 h-1 bg-red-400 rounded-full mr-2"></span>
+                    {errors.email}
+                  </p>
+                )}
+              </div>
             </div>
 
-            {/* Email Field */}
-            <div className="mb-6">
-              <label
-                htmlFor="email"
-                className="block text-[#4A3AFF] font-semibold mb-3 text-lg"
-              >
-                Email Address
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                placeholder="example:taha.laib2@gmail.com"
-                className={`w-full px-4 py-4 bg-white rounded-xl text-gray-800 placeholder-gray-500 border-2 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#4A3AFF] focus:border-transparent ${
-                  errors.email ? "border-red-500" : "border-gray-200"
-                }`}
-                maxLength={100}
-                autoComplete="email"
-                required
-              />
-              {errors.email && (
-                <p className="mt-2 text-red-400 text-sm">{errors.email}</p>
-              )}
-            </div>
-
-            {/* Phone Field */}
-            <div className="mb-6">
+            {/* Phone */}
+            <div className="relative">
               <label
                 htmlFor="phone"
-                className="block text-[#4A3AFF] font-semibold mb-3 text-lg"
+                className="block text-sm font-medium text-gray-300 mb-2"
               >
-                Phone Number
+                Phone Number *
               </label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                value={formData.phone}
-                onChange={handleInputChange}
-                placeholder="e.g: +231 770 000 000"
-                className={`w-full px-4 py-4 bg-white rounded-xl text-gray-800 placeholder-gray-500 border-2 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#4A3AFF] focus:border-transparent ${
-                  errors.phone ? "border-red-500" : "border-gray-200"
-                }`}
-                maxLength={20}
-                autoComplete="tel"
-                required
-              />
+              <div className="relative">
+                <FiPhone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  className={`w-full pl-10 pr-4 py-3 bg-gray-800 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
+                    errors.phone ? "border-red-500" : "border-gray-600"
+                  }`}
+                  placeholder="Enter your phone number"
+                />
+              </div>
               {errors.phone && (
-                <p className="mt-2 text-red-400 text-sm">{errors.phone}</p>
+                <p className="mt-1 text-sm text-red-400 flex items-center">
+                  <span className="w-1 h-1 bg-red-400 rounded-full mr-2"></span>
+                  {errors.phone}
+                </p>
               )}
             </div>
 
-            {/* Project Description Field */}
-            <div className="mb-8">
+            {/* Project Description */}
+            <div className="relative">
               <label
                 htmlFor="projectDescription"
-                className="block text-[#4A3AFF] font-semibold mb-3 text-lg"
+                className="block text-sm font-medium text-gray-300 mb-2"
               >
-                Tell Us About Your Project
+                Project Description *
               </label>
-              <textarea
-                ref={textareaRef}
-                id="projectDescription"
-                name="projectDescription"
-                value={formData.projectDescription}
-                onChange={handleInputChange}
-                placeholder="what do you need ? website , app , automation? share any ideas, goals, or feature you have in mind"
-                rows={4}
-                className={`w-full px-4 py-4 bg-white rounded-xl text-gray-800 placeholder-gray-500 border-2 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#4A3AFF] focus:border-transparent resize-none ${
-                  errors.projectDescription
-                    ? "border-red-500"
-                    : "border-gray-200"
-                }`}
-                maxLength={1000}
-                required
-              />
+              <div className="relative">
+                <FiFileText className="absolute left-3 top-3 text-gray-400 w-5 h-5" />
+                <textarea
+                  ref={textareaRef}
+                  id="projectDescription"
+                  name="projectDescription"
+                  value={formData.projectDescription}
+                  onChange={handleInputChange}
+                  rows={6}
+                  className={`w-full pl-10 pr-4 py-3 bg-gray-800 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none ${
+                    errors.projectDescription
+                      ? "border-red-500"
+                      : "border-gray-600"
+                  }`}
+                  placeholder="Tell us about your project. What are you looking to build? What are your goals and requirements?"
+                />
+              </div>
               {errors.projectDescription && (
-                <p className="mt-2 text-red-400 text-sm">
+                <p className="mt-1 text-sm text-red-400 flex items-center">
+                  <span className="w-1 h-1 bg-red-400 rounded-full mr-2"></span>
                   {errors.projectDescription}
                 </p>
               )}
-              <div className="mt-2 text-right text-sm text-gray-400">
-                {formData.projectDescription.length}/1000
-              </div>
+              <p className="mt-2 text-sm text-gray-400">
+                {formData.projectDescription.length}/1000 characters
+              </p>
             </div>
 
             {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className={`w-full py-4 px-8 cursor-pointer rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#4A3AFF] focus:ring-offset-2 ${
-                isSubmitting
-                  ? "bg-gray-500 cursor-not-allowed"
-                  : "bg-gradient-to-r from-[#4A3AFF] to-[#897FFF] hover:from-[#3A2AEF] hover:to-[#796FEF] text-white shadow-lg hover:shadow-xl"
-              }`}
-            >
-              {isSubmitting ? (
-                <span className="flex items-center justify-center">
-                  <svg
-                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    ></circle>
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    ></path>
-                  </svg>
-                  Sending...
-                </span>
-              ) : (
-                "Send Request"
-              )}
-            </button>
+            <div className="pt-4">
+              <button
+                type="submit"
+                disabled={contactMutation.isPending}
+                className={`w-full flex items-center justify-center gap-2 py-4 px-8 rounded-lg font-medium text-lg transition-all duration-200 ${
+                  contactMutation.isPending
+                    ? "bg-gray-600 cursor-not-allowed"
+                    : "bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transform hover:scale-105"
+                } text-white shadow-lg hover:shadow-xl`}
+              >
+                {contactMutation.isPending ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    Sending Message...
+                  </>
+                ) : (
+                  <>
+                    <FiSend className="w-5 h-5" />
+                    Send Message
+                  </>
+                )}
+              </button>
+            </div>
 
-            {/* Rate Limit Indicator */}
-            <div className="mt-4 text-center text-sm text-gray-400">
-              {submitCount > 0 && (
-                <p>
-                  Submissions this minute: {submitCount}/{RATE_LIMIT}
-                </p>
-              )}
+            {/* Form Info */}
+            <div className="text-center text-sm text-gray-400">
+              <p>We'll get back to you within 24-48 hours</p>
+              <p className="mt-1">All fields marked with * are required</p>
             </div>
           </form>
         </div>
