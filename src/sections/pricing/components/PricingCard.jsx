@@ -4,16 +4,27 @@ const PricingCard = ({ plan }) => {
   const { title, price, currency, icon, features, buttonText, isHighlighted } =
     plan;
   const [isHovered, setIsHovered] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+
+  // Handle both hover and click states
+  const isActive = isHovered || isClicked;
+
+  const handleCardClick = () => {
+    setIsClicked(!isClicked);
+  };
 
   return (
     <div
       className={`w-full max-w-[320px] rounded-2xl shadow-lg p-8 transition-all duration-500 hover:scale-105 hover:shadow-2xl cursor-pointer overflow-hidden ${
         isHighlighted
           ? "bg-[#4A3AFF] text-white"
-          : "bg-white hover:bg-[#4A3AFF] hover:text-white"
+          : isActive
+          ? "bg-[#4A3AFF] text-white"
+          : "bg-white"
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={handleCardClick}
     >
       {/* Icon */}
       <div className="flex mb-4">
@@ -21,7 +32,7 @@ const PricingCard = ({ plan }) => {
           className={`w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 ${
             isHighlighted
               ? "bg-white/20"
-              : isHovered
+              : isActive
               ? "bg-white/20"
               : "bg-[#897FFF]"
           }`}
@@ -41,7 +52,7 @@ const PricingCard = ({ plan }) => {
         className={`text-2xl font-semibold text-start mb-10 transition-all duration-300 ${
           isHighlighted
             ? "text-white"
-            : isHovered
+            : isActive
             ? "text-white"
             : "text-[#0C123B]"
         }`}
@@ -55,7 +66,7 @@ const PricingCard = ({ plan }) => {
           className={`text-[16px] font-semibold mb-1 transition-all duration-300 ${
             isHighlighted
               ? "text-white/80"
-              : isHovered
+              : isActive
               ? "text-white/80"
               : "text-[#170F49]"
           }`}
@@ -66,7 +77,7 @@ const PricingCard = ({ plan }) => {
           className={`text-4xl font-bold transition-all duration-300 ${
             isHighlighted
               ? "text-white"
-              : isHovered
+              : isActive
               ? "text-white"
               : "text-[#0C123B]"
           }`}
@@ -80,7 +91,7 @@ const PricingCard = ({ plan }) => {
         className={`w-full py-3 px-6 rounded-xl font-medium mb-6 hover:shadow-md transition-all duration-300 ${
           isHighlighted
             ? "bg-white text-[#854CFF] hover:bg-gray-100"
-            : isHovered
+            : isActive
             ? "bg-white text-[#854CFF]"
             : "bg-white border border-gray-300 text-gray-700"
         }`}
@@ -93,7 +104,7 @@ const PricingCard = ({ plan }) => {
         className={`w-full h-px mb-6 transition-all duration-300 ${
           isHighlighted
             ? "bg-white/20"
-            : isHovered
+            : isActive
             ? "bg-white/20"
             : "bg-gray-300"
         }`}
@@ -105,7 +116,7 @@ const PricingCard = ({ plan }) => {
           className={`font-medium mb-6 transition-all duration-300 ${
             isHighlighted
               ? "text-white"
-              : isHovered
+              : isActive
               ? "text-white"
               : "text-[#170F49]"
           }`}
@@ -116,7 +127,7 @@ const PricingCard = ({ plan }) => {
         {/* Fixed Height Container */}
         <div
           className={`h-[120px] overflow-hidden transition-all duration-500 ${
-            isHovered ? "h-auto overflow-visible" : ""
+            isActive ? "h-auto overflow-visible" : ""
           }`}
         >
           <ul className="space-y-3">
@@ -126,7 +137,7 @@ const PricingCard = ({ plan }) => {
                   className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 transition-all duration-300 ${
                     isHighlighted
                       ? "bg-white"
-                      : isHovered
+                      : isActive
                       ? "bg-white"
                       : "bg-[#4A3AFF]"
                   }`}
@@ -135,7 +146,7 @@ const PricingCard = ({ plan }) => {
                     className={`w-3 h-3 transition-all duration-300 ${
                       isHighlighted
                         ? "text-white"
-                        : isHovered
+                        : isActive
                         ? "text-[#4A3AFF]"
                         : "text-white"
                     }`}
@@ -153,7 +164,7 @@ const PricingCard = ({ plan }) => {
                   className={`text-sm leading-relaxed transition-all duration-300 ${
                     isHighlighted
                       ? "text-white/90"
-                      : isHovered
+                      : isActive
                       ? "text-white/90"
                       : "text-gray-700"
                   }`}
@@ -170,7 +181,7 @@ const PricingCard = ({ plan }) => {
         className={`w-full h-px mb-2 mt-8 transition-all duration-300 ${
           isHighlighted
             ? "bg-white/20"
-            : isHovered
+            : isActive
             ? "bg-white/20"
             : "bg-gray-300"
         }`}
