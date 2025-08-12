@@ -15,7 +15,7 @@ const TestimonialsCard = ({ testimonial }) => {
     title: "Marketing Manager",
     company: "GreenRoots",
     testimonial:
-      "Working with ClicknCod was a breath of fresh air they understood our vision and turned it into a beautiful, functional product",
+      "Working with Clickncod was a breath of fresh air they understood our vision and turned it into a beautiful, functional product",
     image: "/placeholder-avatar.png",
   };
 
