@@ -123,11 +123,11 @@ const Header = () => {
             Services
           </a>
           <a
-            href="#contact"
+            href="#pricing"
             className="block text-white text-[18px] font-medium py-3 px-4 rounded-lg transition-all duration-300 hover:text-[#504CFF] hover:bg-white/5 hover:pl-6"
             onClick={() => setIsMenuOpen(false)}
           >
-            Contact Us
+            Pricing
           </a>
           <div className="pt-4 border-t border-white/10">
             <div
