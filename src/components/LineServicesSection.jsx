@@ -3,7 +3,7 @@ import React from "react";
 const LineServicesSection = () => {
   return (
     <div className=" relative h-[1px] container z-10 w-full">
-      <div className="absolute top-1/2 left-1/2 w-full xl:w-[110%] h-[70000%] -translate-x-1/2 -translate-y-1/3">
+      <div className="absolute top-1/2 left-1/2 w-[108.5%] xl:w-[110%] h-[70000%] -translate-x-1/2 -translate-y-1/3">
         {/* Desktop SVG */}
         <svg
           className="absolute inset-0 w-full h-full hidden md:block"
@@ -47,7 +47,7 @@ const LineServicesSection = () => {
             opacity="0.8"
             d="M50 732H40C15 732 5 710 5 680V330C5 300 25 270 50 270H350C375 270 395 250 395 220V50C395 20 375 0 350 0H330"
             stroke="url(#paint0_linear_mobile)"
-            strokeWidth="5"
+            strokeWidth="2"
           />
           <defs>
             <linearGradient

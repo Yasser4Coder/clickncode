@@ -3,7 +3,7 @@ import React from "react";
 const LineBetweenServicesWorks = () => {
   return (
     <div className="relative h-[141px] container z-10 w-full">
-      <div className="absolute top-1/2 left-1/2 w-full xl:w-[103%] h-[280%] -translate-x-1/2 -translate-y-1/2">
+      <div className="absolute top-1/2 left-1/2 w-[98.5%] xl:w-[103%] h-[280%] -translate-x-1/2 -translate-y-1/2">
         {/* Desktop SVG */}
         <svg
           className="absolute inset-0 w-full h-full hidden md:block"
@@ -47,7 +47,7 @@ const LineBetweenServicesWorks = () => {
             opacity="0.8"
             d="M390 520H395C398 520 399 500 399 480V350C399 330 380 310 350 310H50C25 310 5 290 5 260V120C5 90 25 70 50 70H300C330 70 350 50 350 20V0"
             stroke="url(#paint0_linear_mobile)"
-            strokeWidth="5"
+            strokeWidth="2"
           />
           <defs>
             <linearGradient

@@ -3,7 +3,7 @@ import React from "react";
 const LineBtweenPricingConatct = () => {
   return (
     <div className="relative h-[141px] container z-10 w-full">
-      <div className="absolute top-1/2 left-1/2 w-full xl:w-[103%] h-[320%] -translate-x-1/2 -translate-y-1/2">
+      <div className="absolute top-1/2 left-1/2 w-[98.5%] xl:w-[103%] h-[320%] -translate-x-1/2 -translate-y-1/2">
         {/* Desktop SVG */}
         <svg
           className="absolute inset-0 w-full h-full hidden md:block"
@@ -47,7 +47,7 @@ const LineBtweenPricingConatct = () => {
             opacity="0.8"
             d="M10 340H5C3 340 1 320 1 300V200C1 150 20 130 50 130H350C380 130 399 110 399 80V40C399 20 380 0 350 0H345"
             stroke="url(#paint0_linear_mobile)"
-            strokeWidth="5"
+            strokeWidth="2"
           />
           <defs>
             <linearGradient

@@ -113,7 +113,7 @@ const Testimonials = () => {
       <section id="about" className="relative min-w-[100vw]">
         <div className="container mx-auto text-white flex flex-col gap-[40px] mb-[100px]">
           <div className="text-center">
-            <h1 className="gradient-text text-3xl sm:text-5xl md:text-6xl font-medium leading-tight mb-6">
+            <h1 className="gradient-text bg-amber-100 sm:text-5xl md:text-6xl font-medium leading-tight mb-6">
               What they say about us
             </h1>
             <p className="text-white text-[16px] font-normal">
