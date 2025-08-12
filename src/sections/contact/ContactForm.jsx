@@ -185,7 +185,7 @@ const ContactForm = () => {
             </div>
             <button
               onClick={() => setIsSuccess(false)}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200"
+              className="bg-blue-600 hover:bg-blue-700 cursor-pointer text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200"
             >
               Send Another Message
             </button>
@@ -351,7 +351,7 @@ const ContactForm = () => {
               <button
                 type="submit"
                 disabled={contactMutation.isPending}
-                className={`w-full flex items-center justify-center gap-2 py-4 px-8 rounded-lg font-medium text-lg transition-all duration-200 ${
+                className={`w-full flex items-center cursor-pointer justify-center gap-2 py-4 px-8 rounded-lg font-medium text-lg transition-all duration-200 ${
                   contactMutation.isPending
                     ? "bg-gray-600 cursor-not-allowed"
                     : "bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transform hover:scale-105"

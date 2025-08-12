@@ -3,7 +3,7 @@ import React from "react";
 const LineServicesSection = () => {
   return (
     <div className=" relative h-[1px] container z-10 w-full">
-      <div className="absolute top-1/2 left-1/2 w-[108.5%] xl:w-[110%] h-[70000%] -translate-x-1/2 -translate-y-1/3">
+      <div className="absolute top-1/2 left-1/2 w-[108.5%] xl:w-[110%] h-[70000%] -translate-x-1/2 -translate-y-[38%]">
         {/* Desktop SVG */}
         <svg
           className="absolute inset-0 w-full h-full hidden md:block"

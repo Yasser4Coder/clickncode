@@ -6,6 +6,16 @@ import perbg from "../../assets/perbg.png";
 import LineServicesSection from "../../components/LineServicesSection";
 
 const ServicesSection = () => {
+  const scrollToContact = () => {
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
+
   return (
     <section
       id="services"
@@ -13,25 +23,27 @@ const ServicesSection = () => {
     >
       <div className="flex flex-col gap-4 pt-[60px] relative z-20">
         <h1 className="gradient-text text-3xl sm:text-5xl md:text-6xl font-medium leading-tight">
-          We don’t just offer services <br /> we build tailored solutions to
+          We don't just offer services <br /> we build tailored solutions to
           match your vision and budget
         </h1>
         <p className="text-white text-[16px] font-normal">
-          Websites, mobile apps, AI systems, and stunning visuals <br /> we’re a
+          Websites, mobile apps, AI systems, and stunning visuals <br /> we're a
           full-stack team crafting digital solutions from idea to launch
         </p>
       </div>
       <LineServicesSection />
       <div className="flex flex-col gap-4 relative z-20">
         <h1 className="gradient-text text-3xl sm:text-5xl md:text-6xl font-medium leading-tight">
-          Let’s work together <br /> with our us
+          Let's work together <br /> with our us
         </h1>
         <div className="flex flex-col gap-[30px] sm:gap-0 items-start sm:flex-row justify-between sm:items-center w-full">
           <p className="text-white text-[16px] font-normal">
             help you to build website company that is modern, user friendly,{" "}
             <br /> good CEO, and Clean design
           </p>
-          <Button color="white">Get Started</Button>
+          <Button color="white" onClick={scrollToContact}>
+            Get Started
+          </Button>
         </div>
       </div>
       <div className="cards flex justify-center relative z-20 flex-wrap gap-[40px]">

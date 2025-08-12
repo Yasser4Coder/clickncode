@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import PricingCard from "./components/PricingCard";
 import { pricingData } from "./PricingData";
 import heroBg2 from "../../assets/hero-section-bg-effect2.png";
 import perbg from "../../assets/perbg.png";
 
 const PricingSection = () => {
+  const [selectedCardId, setSelectedCardId] = useState(null);
+
+  const handleCardSelect = (cardId) => {
+    setSelectedCardId(cardId);
+  };
+
   return (
     <div className="relative min-w-[100vw] py-20">
       <div className="container mx-auto px-4">
@@ -18,7 +24,12 @@ const PricingSection = () => {
         {/* Pricing Cards Grid */}
         <div className="grid relative z-20 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 justify-items-center">
           {pricingData.map((plan) => (
-            <PricingCard key={plan.id} plan={plan} />
+            <PricingCard
+              key={plan.id}
+              plan={plan}
+              isSelected={selectedCardId === plan.id}
+              onSelect={() => handleCardSelect(plan.id)}
+            />
           ))}
         </div>
       </div>

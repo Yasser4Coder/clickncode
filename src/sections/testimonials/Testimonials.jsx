@@ -260,7 +260,7 @@ const Testimonials = () => {
 
         {/* Add Testimonial Modal */}
         {showAddForm && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="fixed inset-0 bg-[#3434348b] bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div className="bg-gray-900 rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
               <div className="p-6">
                 <div className="flex justify-between items-center mb-6">
@@ -269,7 +269,7 @@ const Testimonials = () => {
                   </h3>
                   <button
                     onClick={handleCloseForm}
-                    className="text-gray-400 hover:text-white transition-colors"
+                    className="text-gray-400 cursor-pointer hover:text-white transition-colors"
                   >
                     <FiX className="w-6 h-6" />
                   </button>
@@ -416,7 +416,7 @@ const Testimonials = () => {
                     <button
                       type="submit"
                       disabled={testimonialMutation.isPending}
-                      className={`w-full flex items-center justify-center gap-2 py-3 px-6 rounded-lg font-medium transition-all duration-200 ${
+                      className={`w-full flex cursor-pointer items-center justify-center gap-2 py-3 px-6 rounded-lg font-medium transition-all duration-200 ${
                         testimonialMutation.isPending
                           ? "bg-gray-600 cursor-not-allowed"
                           : "bg-blue-600 hover:bg-blue-700 transform hover:scale-105"

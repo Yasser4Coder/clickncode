@@ -7,6 +7,16 @@ import { FaLinkedinIn } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
 const Herosection = () => {
+  const scrollToContact = () => {
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
+
   return (
     <section
       id="home"
@@ -24,9 +34,11 @@ const Herosection = () => {
           <br className="hidden sm:block" /> product with just one click
         </h1>
         <p className="text-white text-[16px] text-center font-normal">
-          No tech knowledge needed just bring your idea, we’ll handle the rest
+          No tech knowledge needed just bring your idea, we'll handle the rest
         </p>
-        <Button color="white">Start your journey with us</Button>
+        <Button color="white" onClick={scrollToContact}>
+          Start your journey with us
+        </Button>
         <ScrollIndicator />
       </div>
       {/* Background Image */}

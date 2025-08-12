@@ -1,16 +1,27 @@
 import React, { useState } from "react";
 
-const PricingCard = ({ plan }) => {
+const PricingCard = ({ plan, isSelected, onSelect }) => {
   const { title, price, currency, icon, features, buttonText, isHighlighted } =
     plan;
   const [isHovered, setIsHovered] = useState(false);
-  const [isClicked, setIsClicked] = useState(false);
 
-  // Handle both hover and click states
-  const isActive = isHovered || isClicked;
+  // Handle both hover and selection states
+  const isActive = isHovered || isSelected;
 
   const handleCardClick = () => {
-    setIsClicked(!isClicked);
+    onSelect();
+  };
+
+  const handleButtonClick = (e) => {
+    e.stopPropagation(); // Prevent card selection when clicking button
+    // Smooth scroll to contact section
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
   };
 
   return (
@@ -88,6 +99,7 @@ const PricingCard = ({ plan }) => {
 
       {/* Get Started Button */}
       <button
+        onClick={handleButtonClick}
         className={`w-full py-3 px-6 rounded-xl font-medium mb-6 hover:shadow-md transition-all duration-300 ${
           isHighlighted
             ? "bg-white text-[#854CFF] hover:bg-gray-100"
