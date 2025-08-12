@@ -12,7 +12,7 @@ const PricingSection = () => {
   };
 
   return (
-    <div className="relative min-w-[100vw] py-20">
+    <section id="pricing" className="relative min-w-[100vw] py-20">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-start mb-16">
@@ -44,7 +44,7 @@ const PricingSection = () => {
         alt=""
         className="absolute top-[-20%] left-[-10%] z-[-1] rotate-180"
       />
-    </div>
+    </section>
   );
 };
 

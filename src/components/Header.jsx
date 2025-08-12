@@ -57,6 +57,13 @@ const Header = () => {
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#504CFF] transition-all duration-300 group-hover:w-full"></span>
           </a>
           <a
+            href="#pricing"
+            className="relative transition-all duration-300 hover:text-[#504CFF] group"
+          >
+            Pricing
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#504CFF] transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a
             href="#contact"
             className="relative transition-all duration-300 hover:text-[#504CFF] group"
           >
@@ -116,7 +123,7 @@ const Header = () => {
             Services
           </a>
           <a
-            href="#portfolio"
+            href="#contact"
             className="block text-white text-[18px] font-medium py-3 px-4 rounded-lg transition-all duration-300 hover:text-[#504CFF] hover:bg-white/5 hover:pl-6"
             onClick={() => setIsMenuOpen(false)}
           >
