@@ -1,4 +1,5 @@
-import heroBg from "../assets/hero-section-bg-effect.png";
+import { useTranslation } from "react-i18next";
+import heroBg from "../assets/hero-section-bg-effect.webp";
 import Button from "../components/ui/Button";
 import ScrollIndicator from "../components/ScrollIndicator";
 import { FaInstagram } from "react-icons/fa";
@@ -7,6 +8,7 @@ import { FaLinkedinIn } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
 const Herosection = () => {
+  const { t } = useTranslation();
   const scrollToContact = () => {
     const contactSection = document.getElementById("contact");
     if (contactSection) {
@@ -24,20 +26,25 @@ const Herosection = () => {
     >
       <div className="flex flex-col items-center justify-center z-10 gap-[65px] sm:gap-[65px] md:gap-[35px] max-w-4xl mx-auto text-center w-full">
         <div className="flex gap-3 sm:gap-4 md:gap-5">
-          <FaInstagram className="w-5 h-5 sm:w-6 sm:h-6 md:w-[24px] md:h-[24px] text-white hover:text-[#504CFF] transition-colors duration-300 cursor-pointer" />
-          <FaWhatsapp className="w-5 h-5 sm:w-6 sm:h-6 md:w-[24px] md:h-[24px] text-white hover:text-[#504CFF] transition-colors duration-300 cursor-pointer" />
-          <FaLinkedinIn className="w-5 h-5 sm:w-6 sm:h-6 md:w-[24px] md:h-[24px] text-white hover:text-[#504CFF] transition-colors duration-300 cursor-pointer" />
+          <a href="https://www.instagram.com/clickncod/" target="_blank">
+            <FaInstagram className="w-5 h-5 sm:w-6 sm:h-6 md:w-[24px] md:h-[24px] text-white hover:text-[#504CFF] transition-colors duration-300 cursor-pointer" />
+          </a>
+          <a href="" target="_blank">
+            <FaWhatsapp className="w-5 h-5 sm:w-6 sm:h-6 md:w-[24px] md:h-[24px] text-white hover:text-[#504CFF] transition-colors duration-300 cursor-pointer" />
+          </a>
+          <a href="https://www.linkedin.com/company/clickncod" target="_blank">
+            <FaLinkedinIn className="w-5 h-5 sm:w-6 sm:h-6 md:w-[24px] md:h-[24px] text-white hover:text-[#504CFF] transition-colors duration-300 cursor-pointer" />
+          </a>
           <FaXTwitter className="w-5 h-5 sm:w-6 sm:h-6 md:w-[24px] md:h-[24px] text-white hover:text-[#504CFF] transition-colors duration-300 cursor-pointer" />
         </div>
         <h1 className="gradient-text text-5xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[70px] text-center font-bold leading-tight px-4">
-          Build <br className="block sm:hidden" /> your smart digital{" "}
-          <br className="hidden sm:block" /> product with just one click
+          {t("hero.title")}
         </h1>
         <p className="text-white text-[16px] text-center font-normal">
-          No tech knowledge needed just bring your idea, we'll handle the rest
+          {t("hero.subtitle")}
         </p>
         <Button color="white" onClick={scrollToContact}>
-          Start your journey with us
+          {t("hero.cta")}
         </Button>
         <ScrollIndicator />
       </div>

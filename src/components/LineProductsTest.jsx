@@ -48,7 +48,7 @@ const LineProductsTest = () => {
             opacity="0.8"
             d="M2.99998 664.5C2.99996 619 2.99997 663 2.99997 633V423V333C2.99997 303 22.9999 283 47.9999 283H348C373 283 393 263 393 233V53C393 23 373 3 348 3H328"
             stroke="url(#paint0_linear_2044_453)"
-            stroke-width="2"
+            strokeWidth="2"
           />
           <defs>
             <linearGradient
@@ -59,10 +59,10 @@ const LineProductsTest = () => {
               y2="686"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#01002B" />
-              <stop offset="0.1" stop-color="#853CFF" />
-              <stop offset="0.789708" stop-color="#504CFF" />
-              <stop offset="0.940358" stop-color="#01002B" />
+              <stop stopColor="#01002B" />
+              <stop offset="0.1" stopColor="#853CFF" />
+              <stop offset="0.789708" stopColor="#504CFF" />
+              <stop offset="0.940358" stopColor="#01002B" />
             </linearGradient>
           </defs>
         </svg>

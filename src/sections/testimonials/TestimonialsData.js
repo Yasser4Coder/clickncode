@@ -6,7 +6,8 @@ export const testimonialsData = [
     company: "GreenRoots",
     testimonial:
       "Working with Clickncod was a breath of fresh air they understood our vision and turned it into a beautiful, functional product",
-    image: "/placeholder-avatar.png",
+    image:
+      "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
   },
   {
     id: 2,
@@ -15,7 +16,8 @@ export const testimonialsData = [
     company: "SwiftTech Automation",
     testimonial:
       "Their n8n automation cut down our manual tasks by 70%. It changed how our team operates daily and made us way faster",
-    image: "/placeholder-avatar.png",
+    image:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
   },
   {
     id: 3,
@@ -24,7 +26,8 @@ export const testimonialsData = [
     company: "",
     testimonial:
       "They don't just build apps they solve problems. The result was polished, on-brand and scalable",
-    image: "/placeholder-avatar.png",
+    image:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
   },
   {
     id: 4,
@@ -33,7 +36,8 @@ export const testimonialsData = [
     company: "AquaTech Solutions",
     testimonial:
       "Their team understood our industry challenges and built a system that solved problems we didn't even realize we had. Impressive work",
-    image: "/placeholder-avatar.png",
+    image:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
   },
   {
     id: 5,
@@ -42,6 +46,7 @@ export const testimonialsData = [
     company: "",
     testimonial:
       "As a designer myself, I was skeptical but their attention to UX and smooth frontend implementation really impressed me",
-    image: "/placeholder-avatar.png",
+    image:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
   },
 ];

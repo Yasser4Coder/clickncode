@@ -1,6 +1,7 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-unused-vars */
 import React, { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useContactSubmission } from "../../hooks/useContact.js";
 import toast from "react-hot-toast";
 import {
@@ -13,6 +14,7 @@ import {
 } from "react-icons/fi";
 
 const ContactForm = () => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -39,10 +41,6 @@ const ContactForm = () => {
     phone: {
       pattern: /^[\+]?[0-9\s\-\(\)]{10,20}$/,
       message: "Please enter a valid phone number (10-20 digits)",
-    },
-    projectDescription: {
-      pattern: /^[\w\s\.,!?\-()]{10,1000}$/,
-      message: "Project description must be 10-1000 characters",
     },
   };
 
@@ -204,13 +202,10 @@ const ContactForm = () => {
         {/* Header */}
         <div className="text-start mb-16">
           <h1 className="gradient-text text-3xl sm:text-5xl md:text-6xl font-medium leading-tight mb-6">
-            Let's Build Something
-            <br />
-            <span className="text-white">Amazing Together</span>
+            {t("contact.title")}
           </h1>
           <p className="text-gray-300 text-lg sm:text-xl max-w-3xl">
-            Ready to turn your vision into reality? Fill out the form below and
-            let's discuss how we can bring your project to life.
+            {t("contact.subtitle")}
           </p>
         </div>
 
@@ -225,7 +220,7 @@ const ContactForm = () => {
                   htmlFor="fullName"
                   className="block text-sm font-medium text-gray-300 mb-2"
                 >
-                  Full Name *
+                  {t("contact.name")} *
                 </label>
                 <div className="relative">
                   <FiUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -238,7 +233,7 @@ const ContactForm = () => {
                     className={`w-full pl-10 pr-4 py-3 bg-gray-800 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
                       errors.fullName ? "border-red-500" : "border-gray-600"
                     }`}
-                    placeholder="Enter your full name"
+                    placeholder={t("contact.name")}
                   />
                 </div>
                 {errors.fullName && (
@@ -255,7 +250,7 @@ const ContactForm = () => {
                   htmlFor="email"
                   className="block text-sm font-medium text-gray-300 mb-2"
                 >
-                  Email Address *
+                  {t("contact.email")} *
                 </label>
                 <div className="relative">
                   <FiMail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -268,7 +263,7 @@ const ContactForm = () => {
                     className={`w-full pl-10 pr-4 py-3 bg-gray-800 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
                       errors.email ? "border-red-500" : "border-gray-600"
                     }`}
-                    placeholder="Enter your email address"
+                    placeholder={t("contact.email")}
                   />
                 </div>
                 {errors.email && (
@@ -286,7 +281,7 @@ const ContactForm = () => {
                 htmlFor="phone"
                 className="block text-sm font-medium text-gray-300 mb-2"
               >
-                Phone Number *
+                {t("contact.phone")} *
               </label>
               <div className="relative">
                 <FiPhone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -299,7 +294,7 @@ const ContactForm = () => {
                   className={`w-full pl-10 pr-4 py-3 bg-gray-800 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
                     errors.phone ? "border-red-500" : "border-gray-600"
                   }`}
-                  placeholder="Enter your phone number"
+                  placeholder={t("contact.phone")}
                 />
               </div>
               {errors.phone && (
@@ -316,7 +311,7 @@ const ContactForm = () => {
                 htmlFor="projectDescription"
                 className="block text-sm font-medium text-gray-300 mb-2"
               >
-                Project Description *
+                {t("contact.message")} *
               </label>
               <div className="relative">
                 <FiFileText className="absolute left-3 top-3 text-gray-400 w-5 h-5" />
@@ -332,7 +327,7 @@ const ContactForm = () => {
                       ? "border-red-500"
                       : "border-gray-600"
                   }`}
-                  placeholder="Tell us about your project. What are you looking to build? What are your goals and requirements?"
+                  placeholder={t("contact.message")}
                 />
               </div>
               {errors.projectDescription && (
@@ -360,12 +355,12 @@ const ContactForm = () => {
                 {contactMutation.isPending ? (
                   <>
                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    Sending Message...
+                    {t("contact.sending")}
                   </>
                 ) : (
                   <>
                     <FiSend className="w-5 h-5" />
-                    Send Message
+                    {t("contact.sendMessage")}
                   </>
                 )}
               </button>
@@ -373,8 +368,8 @@ const ContactForm = () => {
 
             {/* Form Info */}
             <div className="text-center text-sm text-gray-400">
-              <p>We'll get back to you within 24-48 hours</p>
-              <p className="mt-1">All fields marked with * are required</p>
+              <p>{t("contact.responseTime")}</p>
+              <p className="mt-1">{t("contact.requiredFields")}</p>
             </div>
           </form>
         </div>

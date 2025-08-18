@@ -38,8 +38,8 @@ const ProductCard = ({ product }) => {
           <div className="w-full h-full rounded-2xl flex items-center justify-center">
             <img
               src={productData.image}
-              alt=""
-              className="w-full h-ful object-contain object-center rounded-2xl"
+              alt="Product Image"
+              className="w-full h-full object-contain object-center rounded-2xl"
             />
           </div>
         </div>

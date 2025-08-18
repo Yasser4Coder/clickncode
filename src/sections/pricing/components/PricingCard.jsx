@@ -1,8 +1,27 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const PricingCard = ({ plan, isSelected, onSelect }) => {
-  const { title, price, currency, icon, features, buttonText, isHighlighted } =
-    plan;
+  const { t, i18n } = useTranslation();
+  const {
+    titleEn,
+    titleFr,
+    price,
+    currency,
+    icon,
+    featuresEn,
+    featuresFr,
+    buttonTextEn,
+    buttonTextFr,
+    isHighlighted,
+  } = plan;
+
+  // Get current language
+  const currentLang = i18n.language;
+  const title = currentLang === "fr" ? titleFr : titleEn;
+  const features = currentLang === "fr" ? featuresFr : featuresEn;
+  const buttonText = currentLang === "fr" ? buttonTextFr : buttonTextEn;
+
   const [isHovered, setIsHovered] = useState(false);
 
   // Handle both hover and selection states
@@ -82,7 +101,7 @@ const PricingCard = ({ plan, isSelected, onSelect }) => {
               : "text-[#170F49]"
           }`}
         >
-          starting at
+          {t("pricing.startingAt")}
         </p>
         <p
           className={`text-4xl font-bold transition-all duration-300 ${

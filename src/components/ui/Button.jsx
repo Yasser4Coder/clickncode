@@ -10,17 +10,19 @@ const Button = ({ children, color = "blue", hidden = false, onClick }) => {
 
   if (color === "white") {
     return (
-      <button
+      <a
+        href="#contact"
         onClick={handleClick}
         className="flex button items-center hover:text-white cursor-pointer text-black bg-white gap-2 sm:gap-[10px] text-sm sm:text-base md:text-[16px] px-4 sm:px-6 md:px-[25px] py-3 sm:py-4 md:py-[15px] rounded-3xl font-medium transition-all duration-300 hover:bg-[#504CFF] hover:shadow-lg hover:shadow-[#504CFF]/25 hover:scale-105 active:scale-95"
       >
         <span>{children}</span>
         <BsArrowUpRightCircle className="transition-transform w-[20px] h-[20px] object-contain duration-300 group-hover:translate-x-1" />
-      </button>
+      </a>
     );
   } else if (color === "transparent") {
     return (
-      <button
+      <a
+        href="#contact"
         onClick={handleClick}
         className={`hidden md:flex button ${
           hidden ? "hidden" : ""
@@ -28,7 +30,7 @@ const Button = ({ children, color = "blue", hidden = false, onClick }) => {
       >
         <span>{children}</span>
         <BsArrowUpRightCircle className="transition-transform w-[20px] h-[20px] object-contain duration-300 group-hover:translate-x-1" />
-      </button>
+      </a>
     );
   }
 };

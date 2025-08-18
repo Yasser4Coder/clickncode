@@ -1,7 +1,9 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import logo from "../assets/logo-white.png";
 
 const Footer = () => {
+  const { t } = useTranslation();
   return (
     <footer className="bg-black text-white py-16">
       <div className="container mx-auto px-4">
@@ -20,26 +22,27 @@ const Footer = () => {
 
             {/* Tagline */}
             <p className="text-white/70 text-sm leading-relaxed max-w-xs">
-              Companies that can help you in developing your company for the
-              future
+              {t("footer.description")}
             </p>
           </div>
 
           {/* Services - Middle Section */}
           <div className="space-y-4">
-            <h3 className="text-lg font-bold text-white mb-4">Services</h3>
+            <h3 className="text-lg font-bold text-white mb-4">
+              {t("footer.services")}
+            </h3>
             <ul className="space-y-2">
               <li className="text-white/80 text-sm hover:text-white transition-colors cursor-pointer">
-                Web Development
+                {t("services.webDevelopment.title")}
               </li>
               <li className="text-white/80 text-sm hover:text-white transition-colors cursor-pointer">
-                UI/UX Designer
+                {t("services.uiUxDesign.title")}
               </li>
               <li className="text-white/80 text-sm hover:text-white transition-colors cursor-pointer">
-                App Development
+                {t("services.mobileDevelopment.title")}
               </li>
               <li className="text-white/80 text-sm hover:text-white transition-colors cursor-pointer">
-                AI & Automation
+                {t("services.aiSolutions.title")}
               </li>
             </ul>
           </div>
@@ -68,7 +71,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
             {/* Copyright */}
             <div className="text-white/60 text-sm">
-              © 2025 Click Ncod. All rights reserved
+              © 2025 Clickncod. {t("footer.allRightsReserved")}
             </div>
 
             {/* Legal Links */}
@@ -97,7 +100,8 @@ const Footer = () => {
             <div className="flex items-center space-x-4">
               {/* Instagram */}
               <a
-                href="#"
+                href="https://www.instagram.com/clickncod/"
+                target="_blank"
                 className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer group"
               >
                 <svg
@@ -125,7 +129,9 @@ const Footer = () => {
 
               {/* LinkedIn */}
               <a
-                href="#"
+                href="https://www.linkedin.com/company/clickncod"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer group"
               >
                 <svg

@@ -2,6 +2,8 @@ import caat from "../../assets/works/Caat.png";
 import farmDz from "../../assets/works/FarmDz.png";
 import matePay from "../../assets/works/Matepay.png";
 import aquaTrack from "../../assets/works/AquaTrack.png";
+import reto from "../../assets/works/resto.png";
+import canary from "../../assets/works/canary.png";
 
 export const productsData = [
   {
@@ -44,38 +46,21 @@ export const productsData = [
   },
   {
     id: 5,
-    name: "SmartAnalytics",
-    shortDescription: "AI-powered business intelligence platform",
+    name: "restaurant website",
+    shortDescription:
+      "Restaurant Website with Online Ordering & Delivery System",
     detailedDescription:
-      "Advanced analytics platform that uses machine learning to provide predictive insights, automated reporting, and intelligent data visualization for business decision-making",
-    category: "AI",
-    image: "/placeholder-dashboard.png",
+      "A restaurant website with online ordering & delivery lets customers browse the menu, customize meals, place orders, pay online or on delivery, and get their food delivered to their door with optional tracking.",
+    category: "Web App",
+    image: reto,
   },
   {
     id: 6,
-    name: "VoiceBot Assistant",
-    shortDescription: "Natural language processing chatbot",
+    name: "Canary Visual & Audio",
+    shortDescription: "Canary Visual & Audio Production Company",
     detailedDescription:
-      "Intelligent conversational AI that understands context, learns from interactions, and provides personalized customer support across multiple platforms",
-    category: "AI",
-    image: "/placeholder-dashboard.png",
-  },
-  {
-    id: 7,
-    name: "DesignHub",
-    shortDescription: "Collaborative UI/UX design platform",
-    detailedDescription:
-      "A comprehensive design system that enables teams to create consistent, accessible, and beautiful user interfaces with reusable components and design tokens",
-    category: "UI/UX",
-    image: "/placeholder-dashboard.png",
-  },
-  {
-    id: 8,
-    name: "E-Commerce Pro",
-    shortDescription: "Full-stack web application platform",
-    detailedDescription:
-      "Complete e-commerce solution with inventory management, payment processing, customer analytics, and responsive design for optimal user experience",
+      "Canary brings together creative professionals in audio, video, animation, and creative writing, working as one team to deliver high-quality, innovative content that meets — and exceeds — client expectations",
     category: "Web App",
-    image: "/placeholder-dashboard.png",
+    image: canary,
   },
 ];

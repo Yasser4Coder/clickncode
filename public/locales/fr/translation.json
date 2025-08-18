@@ -1,0 +1,137 @@
+{
+  "header": {
+    "home": "Accueil",
+    "services": "Services",
+    "products": "Produits",
+    "pricing": "Tarifs",
+    "contact": "Contact",
+    "language": "Langue",
+    "cta": "Contactez-nous"
+  },
+  "hero": {
+    "title": "Construisez votre produit numérique intelligent en un seul clic",
+    "subtitle": "Aucune connaissance technique requise, apportez simplement votre idée, nous nous occupons du reste",
+    "cta": "Commencez votre voyage avec nous",
+    "learnMore": "En Savoir Plus"
+  },
+  "services": {
+    "title": "Nous n'offrons pas seulement des services, nous construisons des solutions sur mesure pour correspondre à votre vision et votre budget",
+    "title2": "Travaillons ensemble \navec notre équipe",
+    "subtitle": "Sites web, applications mobiles, systèmes d'IA et visuels époustouflants, nous sommes une équipe full-stack créant des solutions numériques de l'idée au lancement",
+    "webDevelopment": {
+      "title": "Développement Web",
+      "description": "Des pages d'atterrissage élégantes aux sites web multi-pages complexes, rapides, responsives et conçus pour donner des résultats"
+    },
+    "mobileDevelopment": {
+      "title": "Applications Mobiles",
+      "description": "Nous construisons des applications Android et iOS évolutives avec Flutter, garantissant une UX fluide et un look moderne"
+    },
+    "uiUxDesign": {
+      "title": "Design UI/UX",
+      "description": "vous aide à construire une entreprise de sites web qui est moderne, conviviale, avec un bon SEO et un design propre"
+    },
+    "aiSolutions": {
+      "title": "IA & Automatisation",
+      "description": "Nous automatisons l'entreprise du routage des tâches à la synchronisation des données, économisez du temps, réduisez les erreurs et évoluez plus intelligemment"
+    }
+  },
+  "products": {
+    "title": "Nos Produits",
+    "subtitle": "Solutions innovantes prêtes pour votre entreprise",
+    "viewDetails": "Voir les Détails"
+  },
+  "testimonials": {
+    "title": "Ce que Disent Nos Clients",
+    "subtitle": "Fait confiance par les entreprises du monde entier"
+  },
+  "pricing": {
+    "title": "Plans Tarifaires",
+    "subtitle": "Choisissez le plan parfait pour votre entreprise",
+    "monthly": "Mensuel",
+    "yearly": "Annuel",
+    "basic": {
+      "title": "Basique",
+      "description": "Parfait pour les petites entreprises",
+      "price": "99€",
+      "features": [
+        "Site Web 5 Pages",
+        "SEO Basique",
+        "Formulaire de Contact",
+        "Responsive Mobile",
+        "Support 1 Mois"
+      ]
+    },
+    "professional": {
+      "title": "Professionnel",
+      "description": "Idéal pour les entreprises en croissance",
+      "price": "199€",
+      "features": [
+        "Site Web 10 Pages",
+        "SEO Avancé",
+        "Formulaire de Contact",
+        "Responsive Mobile",
+        "Support 3 Mois",
+        "Intégration Analytics",
+        "Intégration Réseaux Sociaux"
+      ]
+    },
+    "enterprise": {
+      "title": "Entreprise",
+      "description": "Pour les projets à grande échelle",
+      "price": "399€",
+      "features": [
+        "Pages Illimitées",
+        "SEO Premium",
+        "Formulaires Avancés",
+        "Responsive Mobile",
+        "Support 6 Mois",
+        "Intégration Analytics",
+        "Intégration Réseaux Sociaux",
+        "Fonctionnalités Personnalisées",
+        "Support Prioritaire"
+      ]
+    },
+    "getStarted": "Commencer",
+    "contactUs": "Nous Contacter"
+  },
+  "contact": {
+    "title": "Construisons Quelque Chose d'Incroyable Ensemble",
+    "subtitle": "Prêt à transformer votre vision en réalité ? Remplissez le formulaire ci-dessous et discutons de la façon dont nous pouvons donner vie à votre projet.",
+    "name": "Nom Complet",
+    "email": "Adresse Email",
+    "phone": "Numéro de Téléphone",
+    "message": "Parlez-nous de votre projet. Que souhaitez-vous construire ? Quels sont vos objectifs et exigences ?",
+    "sendMessage": "Envoyer le Message",
+    "sending": "Envoi du Message...",
+    "success": "Message envoyé avec succès !",
+    "error": "Erreur lors de l'envoi du message. Veuillez réessayer."
+  },
+  "footer": {
+    "description": "Entreprises qui peuvent vous aider à développer votre entreprise pour l'avenir",
+    "quickLinks": "Liens Rapides",
+    "services": "Services",
+    "products": "Produits",
+    "pricing": "Tarifs",
+    "contact": "Contact",
+    "followUs": "Suivez-Nous",
+    "allRightsReserved": "Tous droits réservés."
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur s'est produite",
+    "retry": "Réessayer",
+    "close": "Fermer",
+    "save": "Sauvegarder",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "view": "Voir",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "sort": "Trier",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "submit": "Soumettre",
+    "reset": "Réinitialiser"
+  }
+}

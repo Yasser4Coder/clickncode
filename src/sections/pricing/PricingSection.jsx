@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import PricingCard from "./components/PricingCard";
 import { pricingData } from "./PricingData";
 import heroBg2 from "../../assets/hero-section-bg-effect2.png";
 import perbg from "../../assets/perbg.png";
 
 const PricingSection = () => {
+  const { t } = useTranslation();
   const [selectedCardId, setSelectedCardId] = useState(null);
 
   const handleCardSelect = (cardId) => {
@@ -17,7 +19,7 @@ const PricingSection = () => {
         {/* Header */}
         <div className="text-start mb-16">
           <h1 className="gradient-text text-3xl sm:text-5xl md:text-6xl font-medium leading-tight mb-6">
-            Pricing Sneak Peek
+            {t("pricing.title")}
           </h1>
         </div>
 

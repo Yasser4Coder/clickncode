@@ -1,0 +1,5 @@
+List of images optimized to WebP or AVIF format:
+- hero-section-bg-effect.webp
+- pricingbg.webp
+- testimonialsIcon.webp
+- ... (other images)

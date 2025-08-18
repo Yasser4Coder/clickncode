@@ -31,9 +31,9 @@ const TestimonialsCard = ({ testimonial }) => {
       <div className="w-full h-full flex flex-col gap-[20px] relative z-10 p-[30px] text-white">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-[15px] max-w-[60%]">
-            <div className="min-w-[48px] min-h-[48px] rounded-full bg-[#504CFF]">
+            <div className="min-w-[48px] min-h-[48px] max-w-[48px] max-h-[48px] rounded-full bg-[#504CFF]">
               <img
-                src={testimonialCardImage}
+                src={testimonialData.image}
                 alt=""
                 className="w-full h-full rounded-full object-cover"
               />

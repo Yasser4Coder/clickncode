@@ -44,7 +44,7 @@ const ServiceCard = ({ title, desc, bg = "web", icon }) => {
                 ? aiicon
                 : uiuxicon
             }
-            alt=""
+            alt="Service Icon"
             className="object-cover w-full h-full rounded-full transition-transform duration-300 group-hover:scale-110"
           />
         </div>

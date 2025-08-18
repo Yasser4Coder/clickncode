@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import TestimonialsCard from "./components/TestimonialsCard";
 import {
   useTestimonials,
@@ -21,6 +22,7 @@ import heroBg2 from "../../assets/hero-section-bg-effect2.png";
 import perbg from "../../assets/perbg.png";
 
 const Testimonials = () => {
+  const { t } = useTranslation();
   const [showAddForm, setShowAddForm] = useState(false);
   const [newTestimonial, setNewTestimonial] = useState({
     name: "",
@@ -85,9 +87,7 @@ const Testimonials = () => {
 
       // Check if the submission was successful
       if (result && result.status === "success") {
-        toast.success(
-          "Thank you for your testimonial! It has been submitted for review and will be published once approved."
-        );
+        toast.success(t("testimonials.form.success"));
         handleCloseForm();
       } else {
         // Handle unexpected response format
@@ -114,11 +114,10 @@ const Testimonials = () => {
         <div className="container mx-auto text-white flex flex-col gap-[40px] mb-[100px]">
           <div className="text-center">
             <h1 className="gradient-text bg-amber-100 sm:text-5xl md:text-6xl font-medium leading-tight mb-6">
-              What they say about us
+              {t("testimonials.title")}
             </h1>
             <p className="text-white text-[16px] font-normal">
-              Work in the IT field includes Web Design, UI/UX Design, ai &
-              automation
+              {t("testimonials.subtitle")}
             </p>
           </div>
           <div className="flex justify-center">
@@ -136,11 +135,10 @@ const Testimonials = () => {
         <div className="container mx-auto text-white flex flex-col gap-[40px] mb-[100px]">
           <div className="text-center">
             <h1 className="gradient-text text-3xl sm:text-5xl md:text-6xl font-medium leading-tight mb-6">
-              What they say about us
+              {t("testimonials.title")}
             </h1>
             <p className="text-white text-[16px] font-normal">
-              Work in the IT field includes Web Design, UI/UX Design, ai &
-              automation
+              {t("testimonials.subtitle")}
             </p>
           </div>
           <div className="text-center text-red-400">
@@ -151,17 +149,33 @@ const Testimonials = () => {
     );
   }
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    itemReviewed: {
+      "@type": "Organization",
+      name: "ClicknCod",
+    },
+    reviewBody: "What our clients say about us.",
+    author: {
+      "@type": "Person",
+      name: "Various Clients",
+    },
+  };
+
   return (
     <section id="about" className="relative min-w-[100vw]">
+      <script type="application/ld+json">
+        {JSON.stringify(structuredData)}
+      </script>
       <div className="container mx-auto text-white flex flex-col gap-[40px] mb-[100px]">
         <div>
           <div className="flex flex-col gap-4 mb-8">
             <h1 className="gradient-text text-3xl sm:text-5xl md:text-6xl font-medium leading-tight">
-              What they say about us
+              {t("testimonials.title")}
             </h1>
             <p className="text-white text-[16px] font-normal">
-              Work in the IT field includes Web Design, UI/UX Design, ai &
-              automation
+              {t("testimonials.subtitle")}
             </p>
             {/* Show count of approved testimonials */}
             {!isLoading && testimonialsData?.data && (
@@ -235,7 +249,8 @@ const Testimonials = () => {
             <div className="w-full h-full flex flex-col gap-[20px] items-center justify-center relative z-10 p-[30px] text-white">
               <img src={testimonialCardAdd} alt="" />
               <div className="text-[16px] font-medium text-center">
-                add your feedback about <br /> our services
+                {t("testimonials.addFeedback")} <br />{" "}
+                {t("testimonials.ourServices")}
               </div>
             </div>
           </div>
@@ -244,17 +259,17 @@ const Testimonials = () => {
         {/* Background Images */}
         <img
           src={testimonialsIconBg}
-          alt=""
+          alt="Testimonial Background"
           className="absolute top-[10%] right-[-5%] z-[-2]"
         />
         <img
           src={heroBg2}
-          alt=""
+          alt="Hero Background 2"
           className="absolute top-[-20%] left-[-10%] z-[-2]"
         />
         <img
           src={perbg}
-          alt=""
+          alt="Personal Background"
           className="absolute bottom-[-10%] right-[-5%] z-[-2]"
         />
 
@@ -265,7 +280,7 @@ const Testimonials = () => {
               <div className="p-6">
                 <div className="flex justify-between items-center mb-6">
                   <h3 className="text-xl font-semibold text-white">
-                    Share Your Experience
+                    {t("testimonials.form.title")}
                   </h3>
                   <button
                     onClick={handleCloseForm}
@@ -279,7 +294,7 @@ const Testimonials = () => {
                   {/* Name */}
                   <div>
                     <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Your Name *
+                      {t("testimonials.form.name")}
                     </label>
                     <div className="relative">
                       <FiUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -290,7 +305,7 @@ const Testimonials = () => {
                         onChange={handleInputChange}
                         required
                         className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="Enter your name"
+                        placeholder={t("testimonials.form.namePlaceholder")}
                       />
                     </div>
                   </div>
@@ -298,7 +313,7 @@ const Testimonials = () => {
                   {/* Title */}
                   <div>
                     <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Your Title *
+                      {t("testimonials.form.title_label")}
                     </label>
                     <input
                       type="text"
@@ -307,14 +322,14 @@ const Testimonials = () => {
                       onChange={handleInputChange}
                       required
                       className="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="e.g., CEO, Developer, Designer"
+                      placeholder={t("testimonials.form.titlePlaceholder")}
                     />
                   </div>
 
                   {/* Company */}
                   <div>
                     <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Company
+                      {t("testimonials.form.company")}
                     </label>
                     <div className="relative">
                       <FiBriefcase className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -324,7 +339,7 @@ const Testimonials = () => {
                         value={newTestimonial.company}
                         onChange={handleInputChange}
                         className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="Enter company name (optional)"
+                        placeholder={t("testimonials.form.companyPlaceholder")}
                       />
                     </div>
                   </div>
@@ -332,7 +347,7 @@ const Testimonials = () => {
                   {/* Email */}
                   <div>
                     <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Email Address
+                      {t("testimonials.form.email")}
                     </label>
                     <div className="relative">
                       <FiMail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -342,18 +357,18 @@ const Testimonials = () => {
                         value={newTestimonial.email}
                         onChange={handleInputChange}
                         className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="Enter your email (optional, for newsletter)"
+                        placeholder={t("testimonials.form.emailPlaceholder")}
                       />
                     </div>
                     <p className="mt-1 text-xs text-gray-400">
-                      We'll add you to our newsletter for updates and insights
+                      {t("testimonials.form.newsletterNote")}
                     </p>
                   </div>
 
                   {/* Service */}
                   <div>
                     <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Service Used
+                      {t("testimonials.form.serviceUsed")}
                     </label>
                     <select
                       name="service"
@@ -361,18 +376,28 @@ const Testimonials = () => {
                       onChange={handleInputChange}
                       className="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
-                      <option value="Web Development">Web Development</option>
-                      <option value="Mobile App">Mobile App</option>
-                      <option value="AI & Automation">AI & Automation</option>
-                      <option value="UI/UX Design">UI/UX Design</option>
-                      <option value="Other">Other</option>
+                      <option value="Web Development">
+                        {t("testimonials.form.webDevelopment")}
+                      </option>
+                      <option value="Mobile App">
+                        {t("testimonials.form.mobileApp")}
+                      </option>
+                      <option value="AI & Automation">
+                        {t("testimonials.form.aiAutomation")}
+                      </option>
+                      <option value="UI/UX Design">
+                        {t("testimonials.form.uiUxDesign")}
+                      </option>
+                      <option value="Other">
+                        {t("testimonials.form.other")}
+                      </option>
                     </select>
                   </div>
 
                   {/* Rating */}
                   <div>
                     <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Rating *
+                      {t("testimonials.form.rating")}
                     </label>
                     <div className="flex gap-2">
                       {[1, 2, 3, 4, 5].map((star) => (
@@ -395,7 +420,7 @@ const Testimonials = () => {
                   {/* Testimonial */}
                   <div>
                     <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Your Experience *
+                      {t("testimonials.form.experience")}
                     </label>
                     <div className="relative">
                       <FiMessageSquare className="absolute left-3 top-3 text-gray-400 w-4 h-4" />
@@ -406,7 +431,9 @@ const Testimonials = () => {
                         required
                         rows={4}
                         className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                        placeholder="Tell us about your experience with our services..."
+                        placeholder={t(
+                          "testimonials.form.experiencePlaceholder"
+                        )}
                       />
                     </div>
                   </div>
@@ -430,15 +457,14 @@ const Testimonials = () => {
                       ) : (
                         <>
                           <FiPlus className="w-4 h-4" />
-                          Submit Testimonial
+                          {t("testimonials.form.submit")}
                         </>
                       )}
                     </button>
 
                     {/* Approval Note */}
                     <p className="mt-3 text-xs text-gray-400 text-center">
-                      Your testimonial will be reviewed and published within
-                      24-48 hours
+                      {t("testimonials.form.reviewNote")}
                     </p>
                   </div>
                 </form>

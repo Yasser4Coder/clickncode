@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import Button from "./ui/Button";
 import arrow from "../assets/uil_arrow-up.png";
 import logo from "../assets/logo-white.png";
+import LanguageSwitcher from "./LanguageSwitcher";
+import MobileLanguageSwitcher from "./MobileLanguageSwitcher";
 
 const Header = () => {
+  const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -39,43 +43,46 @@ const Header = () => {
             href="#about"
             className="relative transition-all duration-300 hover:text-[#504CFF] group"
           >
-            About
+            {t("header.home")}
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#504CFF] transition-all duration-300 group-hover:w-full"></span>
           </a>
           <a
             href="#services"
             className="relative transition-all duration-300 hover:text-[#504CFF] group"
           >
-            Services
+            {t("header.services")}
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#504CFF] transition-all duration-300 group-hover:w-full"></span>
           </a>
           <a
             href="#portfolio"
             className="relative transition-all duration-300 hover:text-[#504CFF] group"
           >
-            Portfolio
+            {t("header.products")}
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#504CFF] transition-all duration-300 group-hover:w-full"></span>
           </a>
           <a
             href="#pricing"
             className="relative transition-all duration-300 hover:text-[#504CFF] group"
           >
-            Pricing
+            {t("header.pricing")}
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#504CFF] transition-all duration-300 group-hover:w-full"></span>
           </a>
           <a
             href="#contact"
             className="relative transition-all duration-300 hover:text-[#504CFF] group"
           >
-            Contact Us
+            {t("header.contact")}
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#504CFF] transition-all duration-300 group-hover:w-full"></span>
           </a>
         </div>
 
-        {/* Desktop Button */}
-        <Button color="transparent" hidden={true}>
-          Get Started
-        </Button>
+        {/* Language Switcher and Button */}
+        <div className="hidden md:flex items-center space-x-4">
+          <LanguageSwitcher />
+          <Button color="transparent" hidden={true}>
+            {t("header.cta")}
+          </Button>
+        </div>
 
         {/* Mobile Menu Button */}
         <button
@@ -113,34 +120,39 @@ const Header = () => {
             className="block text-white text-[18px] font-medium py-3 px-4 rounded-lg transition-all duration-300 hover:text-[#504CFF] hover:bg-white/5 hover:pl-6"
             onClick={() => setIsMenuOpen(false)}
           >
-            About
+            {t("header.home")}
           </a>
           <a
             href="#services"
             className="block text-white text-[18px] font-medium py-3 px-4 rounded-lg transition-all duration-300 hover:text-[#504CFF] hover:bg-white/5 hover:pl-6"
             onClick={() => setIsMenuOpen(false)}
           >
-            Services
+            {t("header.services")}
           </a>
           <a
             href="#pricing"
             className="block text-white text-[18px] font-medium py-3 px-4 rounded-lg transition-all duration-300 hover:text-[#504CFF] hover:bg-white/5 hover:pl-6"
             onClick={() => setIsMenuOpen(false)}
           >
-            Pricing
+            {t("header.pricing")}
           </a>
+          {/* Language Switcher in Mobile Menu */}
           <div className="pt-4 border-t border-white/10">
-            <div
+            <MobileLanguageSwitcher />
+          </div>
+          <div className="pt-4 border-t border-white/10">
+            <a
+              href="#contact"
               onClick={scrollToContact}
               className="button cursor-pointer text-white border-2 flex gap-[10px] text-[16px] px-[25px] py-[15px] rounded-3xl font-medium border-[#504CFF] transition-all duration-300 hover:bg-[#504CFF] hover:shadow-lg hover:shadow-[#504CFF]/25 active:scale-95"
             >
-              <span>Get Started</span>
+              <span>{t("header.cta")}</span>
               <img
                 src={arrow}
                 alt=""
                 className="transition-transform duration-300 group-hover:translate-x-1"
               />
-            </div>
+            </a>
           </div>
         </div>
       </div>
